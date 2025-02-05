@@ -6,7 +6,7 @@ const CURRENT_DIR = dirname(fileURLToPath(import.meta.url))
 const MIMETYPES = ["image/png", "image/jpg", "image/jpeg"]
 const MAX_SIZE = 100000000
 
-const createMulterConfig = (destinationFolder) => {
+export const createMulterConfig = (destinationFolder) => {
     return multer({
         storage: multer.diskStorage({
             destination: (req, file, cb) => {

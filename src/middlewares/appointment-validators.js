@@ -9,3 +9,5 @@ export const createAppointmentValidator = [
     validarCampos,
     handleErrors
 ];
+
+

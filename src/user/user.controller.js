@@ -127,3 +127,23 @@ export const updateUser = async (req, res) => {
         });
     }
 }
+
+export const updateProfilePicture = async (req, res) => {
+    try {
+        const { uid } = req.params;
+        const { newProfilePicture } = req.file ? req.file.filename : null;
+
+        await User.findByIdAndUpdate(uid, {profilePicture: newProfilePicture}, {new: true})
+        return res.status(200).json({
+            success: true,
+            message: "Foto de perfil actualizada",
+        })
+
+    } catch (err) {
+        res.status(500).json({
+            success:false,
+            msg: 'Error al actualizar foto de perfil',
+            error: err.message
+        })
+    }
+}
