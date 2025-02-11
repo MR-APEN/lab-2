@@ -114,13 +114,36 @@ JWT_SECRET=<tu_secreto_jwt>
 Las siguientes funcionalidades necesitan ser desarrolladas:
 
 1. **Actualizar Foto del Usuario**
-   - Descripción: Implementar funcionalidad para actualizar la foto de perfil del usuario.
+    - Descripción: Implementar funcionalidad para actualizar la foto de perfil del usuario.
+    - **URL:** `/api/user/updateProfilePicture/:uid`
+    - **Método:** `PATCH`
+    - **Cuerpo:**
+      ```json
+      {
+        "profilePicture": "file"
+      }
+      ```
 
 2. **Listar Citas**
    - Descripción: Implementar funcionalidad para listar todas las citas de un usuario.
+    - **URL:** `/api/appointment/listAppointments/user/:userId`
+    - **Método:** `GET` 
 
 3. **Actualizar Cita**
    - Descripción: Implementar funcionalidad para actualizar una cita existente.
+    - **URL:** `/api/appointment/updateAppointment/:id`
+    - **Método:** `PUT`
+    - **Cuerpo:**
+      ```json
+      {
+        "status": "string",
+        "date": "date",
+        "pet": "<pet_id>",
+        "user": "<user_id>"
+      }
+      ```
 
 4. **Cancelar Cita**
    - Descripción: Implementar funcionalidad para cancelar una cita existente.
+    - **URL:** `/api/appointment/deleteAppointment/:id`
+    - **Método:** `DELETE` 
