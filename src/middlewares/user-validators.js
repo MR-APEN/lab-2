@@ -59,3 +59,11 @@ export const updateUserValidator = [
     validarCampos,
     handleErrors
 ]
+
+export const updateProfilePictureValidator = [
+    param("uid").isMongoId().withMessage("No es un ID válido de MongoDB"),
+    param("uid").custom(userExists),
+    validarCampos,
+    deleteFileOnError,
+    handleErrors
+]
