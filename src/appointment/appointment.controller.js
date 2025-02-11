@@ -94,3 +94,35 @@ export const getAppointmentByOwner = async (req, res) => {
     });
   }
 };
+
+export const updateAppointment = async (req, res) => {
+  try {
+    const { id } = req.params
+    const { date, status, pet, user} = req.body
+
+    const appointment = await Appointment.findById(id)
+    if(!appointment){
+      return res.status(404).json({
+        message: "No se encontro la cita"
+      })
+    }
+
+    const updatedAppointment = await Appointment.findByIdAndUpdate(
+      id,
+      {date, status, pet, user},
+      { new: true}
+    ) 
+
+    return res.status(200).json({
+      message: "Cita actualizada correctamente",
+      appointment: updatedAppointment
+    })
+
+  } catch (err) {
+    return res.status(500).json({
+      success: false,
+      message: "Error al actualizar cita",
+      error: err.message
+    })
+  }
+}

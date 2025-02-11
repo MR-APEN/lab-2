@@ -1,5 +1,6 @@
-import { body } from "express-validator";
+import { body, param } from "express-validator";
 import { validarCampos } from "./validate-fields.js";
+import { appointmentExists } from "../helpers/db-validators.js";
 import { handleErrors } from "./handle-errors.js";
 
 export const createAppointmentValidator = [
@@ -9,5 +10,14 @@ export const createAppointmentValidator = [
     validarCampos,
     handleErrors
 ];
+
+export const updateAppointmentValidator = [
+    param("id", "No es un ID válido").isMongoId(),
+    param("id").custom(appointmentExists),
+    validarCampos,
+    handleErrors
+];
+
+
 
 
