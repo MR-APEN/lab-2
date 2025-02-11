@@ -126,3 +126,30 @@ export const updateAppointment = async (req, res) => {
     })
   }
 }
+
+export const deleteAppointment = async (req, res) => {
+  try {
+    const { id } = req.params
+
+    const appointment = await Appointment.findById(id)
+    if(!appointment){
+      return res.status(404).json({
+        message: "No se encontro la cita"
+      })
+    }
+
+    await Appointment.findByIdAndUpdate(id, {status: "CANCELLED"}, { new: true})
+
+    return res.status(200).json({
+      success: true,
+      message: "Cita cancelada con exito",
+      appointment
+    })
+
+  } catch (err) {
+    return res.status(500).json({
+      message: "Error al cancelar la cita",
+      error: err.message
+    })
+  }
+}
